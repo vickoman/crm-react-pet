@@ -1,0 +1,19 @@
+{
+  "name": "crmgraphqlpetapp",
+  "version": "1.0.0",
+  "description": "CRM built with React and Graphql",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Victor Diaz",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^3.6.3",
+    "graphql": "^16.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
