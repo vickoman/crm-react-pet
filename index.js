@@ -1,5 +1,5 @@
 const { ApolloServer, gql} = require('apollo-server');
-
+const typeDefs = require('./db/schema');
 // Data
 const cursos = [
     {
@@ -19,19 +19,7 @@ const cursos = [
     }
 ];
 
-// Schema
-const typeDefs = gql`
-    type Curso {
-        titulo: String
-        tecnologia: String
-        profesor: String
-    }
 
-    type Query {
-        allCourses : [Curso]
-        firstCourse : Curso
-    }
-`;
 
 // Resolvers
 const resolvers = {
