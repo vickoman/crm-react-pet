@@ -4,15 +4,18 @@ const { ApolloServer, gql} = require('apollo-server');
 const cursos = [
     {
         titulo: 'Curso de GraphQL',
-        tecnologia: 'GraphQL'
+        tecnologia: 'GraphQL',
+        profesor: 'Victor Diaz'
     },
     {
         titulo: 'Curso de NodeJS',
-        tecnologia: 'NodeJS'
+        tecnologia: 'NodeJS',
+        profesor: 'Victor Diaz'
     },
     {
         titulo: 'Curso de React',
-        tecnologia: 'React'
+        tecnologia: 'React',
+        profesor: 'Victor Diaz'
     }
 ];
 
@@ -21,17 +24,20 @@ const typeDefs = gql`
     type Curso {
         titulo: String
         tecnologia: String
+        profesor: String
     }
 
     type Query {
-        obtenerCursos : [Curso]
+        allCourses : [Curso]
+        firstCourse : Curso
     }
 `;
 
 // Resolvers
 const resolvers = {
     Query: {
-        obtenerCursos: () => cursos
+        allCourses: () => cursos,
+        firstCourse: () => cursos[0]
     }
 };
 
