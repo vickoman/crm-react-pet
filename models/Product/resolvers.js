@@ -55,7 +55,10 @@ const deleteProduct = async(_, { id }, ctx, info) => {
             message: `product with ${id} was deleted successfully`
         }
     } catch (err) {
-        return new Error(err);
+        return {
+            wasDeleted: false,
+            message: err.message
+        }
     }
 };
 
