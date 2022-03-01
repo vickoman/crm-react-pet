@@ -1,6 +1,6 @@
 // Data
 const User = require('../models/user');
-const { getAllProducts, createProduct } = require('../models/Product/resolvers');
+const { getAllProducts, updateStock, createProduct } = require('../models/Product/resolvers');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -58,7 +58,8 @@ const resolvers = {
                 console.log(err);
             }
         },
-        createProduct
+        createProduct,
+        updateStock
     }
 };
 

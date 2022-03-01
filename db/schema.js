@@ -31,6 +31,7 @@ const typeDefs = gql`
     }
 
     type Product {
+        id: ID
         name: String
         stock: Int
         price: Float
@@ -49,9 +50,15 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        # Users 
         createUser(input: UserInput!) : User
+
+        # Auth
         auth(input: AuthInput!) : Token
+
+        # Product 
         createProduct(input: ProductInput!) : Product
+        updateStock(id: ID!, stock: Int!) : Product
     }
 `;
 
