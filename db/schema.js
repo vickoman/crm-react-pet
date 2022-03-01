@@ -8,8 +8,12 @@ const typeDefs = gql`
         profesor: String
     }
 
+    input CursoInput {
+        tecnologia: String
+    }
+
     type Query {
-        allCourses : [Curso]
+        allCourses(input: CursoInput!) : [Curso]
         firstCourse : Curso
     }
 `;
