@@ -42,6 +42,23 @@ const updateProduct = async(_, { id, input }, ctx, info) => {
     return product;
 };
 
+// Delete product
+const deleteProduct = async(_, { id }, ctx, info) => {
+    try {
+        const product = await Product.findById(id);
+        if (!product) {
+            throw new Error('Product does not exists');
+        }
+        product.remove();
+        return {
+            wasDeleted: true,
+            message: `product with ${id} was deleted successfully`
+        }
+    } catch (err) {
+        return new Error(err);
+    }
+};
+
 const createProduct = async(_, { input }, ctx, info) => {
     // check if product exists
     const { name, stock, price } = input;
@@ -65,5 +82,6 @@ module.exports = {
     getAllProducts,
     createProduct,
     updateStock,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }
