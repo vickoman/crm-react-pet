@@ -44,9 +44,13 @@ const typeDefs = gql`
     }
 
     type Query {
+        # Users
         getUsers: [User]
         getUser(token: String!): User
+
+        # Products
         getAllProducts: [Product]
+        getProduct(id: ID!): Product
     }
 
     type Mutation {
