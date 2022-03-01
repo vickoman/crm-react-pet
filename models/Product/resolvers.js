@@ -64,7 +64,7 @@ const deleteProduct = async(_, { id }, ctx, info) => {
 
 const createProduct = async(_, { input }, ctx, info) => {
     // check if product exists
-    const { name, stock, price } = input;
+    const { name } = input;
     const product = await Product.findOne({ name });
     if (product) {
         throw new Error('Product already exists');
