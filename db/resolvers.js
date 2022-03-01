@@ -1,5 +1,6 @@
 // Data
 const User = require('../models/user');
+const { getAllProducts, createProduct } = require('../models/Product/resolvers');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -18,7 +19,8 @@ const resolvers = {
         getUser: async (_, { token }) => {
             const userId = await jwt.verify(token, process.env.SECRET);
             return userId;
-        }
+        },
+        getAllProducts
     },
     Mutation: {
         auth: async (_, { input }) => {
@@ -55,7 +57,8 @@ const resolvers = {
             } catch (err) {
                 console.log(err);
             }
-        }
+        },
+        createProduct
     }
 };
 
