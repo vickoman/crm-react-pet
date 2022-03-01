@@ -53,6 +53,11 @@ const typeDefs = gql`
         getProduct(id: ID!): Product
     }
 
+    type responseDeleted {
+        wasDeleted: Boolean!
+        message: String
+    }
+
     type Mutation {
         # Users 
         createUser(input: UserInput!) : User
@@ -64,6 +69,7 @@ const typeDefs = gql`
         createProduct(input: ProductInput!) : Product
         updateStock(id: ID!, stock: Int!) : Product
         updateProduct(id: ID!, input: ProductInput!) : Product
+        deleteProduct(id: ID!) : responseDeleted
     }
 `;
 
