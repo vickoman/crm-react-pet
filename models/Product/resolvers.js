@@ -29,6 +29,19 @@ const updateStock = async(_, { id, stock }, ctx, info) => {
     return product;
 };
 
+// Update product
+const updateProduct = async(_, { id, input }, ctx, info) => {
+    const product = await Product.findById(id);
+    if (!product) {
+        throw new Error('Product does not exists');
+    }
+    Object.keys(input).forEach(key => {
+        product[key] = input[key];
+    });
+    product.save();
+    return product;
+};
+
 const createProduct = async(_, { input }, ctx, info) => {
     // check if product exists
     const { name, stock, price } = input;
@@ -51,5 +64,6 @@ module.exports = {
     getProduct,
     getAllProducts,
     createProduct,
-    updateStock
+    updateStock,
+    updateProduct
 }
