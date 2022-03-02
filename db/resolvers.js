@@ -16,7 +16,8 @@ const {
 } = require('../models/User/resolvers');
 const {
     getClients,
-    createClient
+    createClient,
+    getClientsBySeller
 } = require('../models/Client/resolvers');
 
 // Resolvers
@@ -26,7 +27,8 @@ const resolvers = {
         getUser,
         getAllProducts,
         getProduct,
-        getClients
+        getClients,
+        getClientsBySeller
     },
     Mutation: {
         auth,

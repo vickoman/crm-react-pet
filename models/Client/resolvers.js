@@ -1,9 +1,22 @@
 const Client = require("./Client");
 
 // Get all Clients
-const getClients = () => {
+const getClients = async() => {
     try {
-        const clients =  Client.find();
+        const clients =  await Client.find();
+        if (!clients) {
+            return  new Error('Clients does not exists');
+        }
+        return clients;
+    } catch (err) {
+        return new Error(err);
+    }
+};
+
+// Get Clients By seller logged
+const getClientsBySeller = async(_, {}, ctx) => {
+    try {
+        const clients =  await Client.find({ seller: ctx.user.id });
         if (!clients) {
             return  new Error('Clients does not exists');
         }
@@ -36,5 +49,6 @@ const createClient = async (_, { input }, ctx) => {
 
 module.exports = {
     getClients,
-    createClient
+    createClient,
+    getClientsBySeller
 }
