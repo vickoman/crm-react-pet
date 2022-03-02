@@ -74,6 +74,7 @@ const typeDefs = gql`
 
         # Clients
         getClients: [Client]
+        getClientsBySeller: [Client]
     }
 
     type responseDeleted {
