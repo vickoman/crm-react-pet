@@ -14,6 +14,10 @@ const {
     getUsers,
     getUser
 } = require('../models/User/resolvers');
+const {
+    getClients,
+    createClient
+} = require('../models/Client/resolvers');
 
 // Resolvers
 const resolvers = {
@@ -21,7 +25,8 @@ const resolvers = {
         getUsers,
         getUser,
         getAllProducts,
-        getProduct
+        getProduct,
+        getClients
     },
     Mutation: {
         auth,
@@ -29,7 +34,8 @@ const resolvers = {
         createProduct,
         updateStock,
         updateProduct,
-        deleteProduct
+        deleteProduct,
+        createClient
     }
 };
 
