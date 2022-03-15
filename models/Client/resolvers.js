@@ -47,8 +47,30 @@ const createClient = async (_, { input }, ctx) => {
     }
 };
 
+// Update client
+const updateClient = async(_, { id, input }, ctx) => {
+    // Verify if client exists
+    const client = await Client.findById(id);
+    if (!client) {
+        throw new Error('Client does not exists');
+    }
+    // Verify if seller is who edit
+    if (client.seller.toString() !== ctx.user.id) {
+        throw new Error('Not authorized');
+    }
+
+    // Update client
+    try {
+        const nclient = await Client.findByIdAndUpdate(id, input, { new: true });
+        return nclient;
+    }catch (err) {
+        console.log(err);
+    }
+};
+
 module.exports = {
     getClients,
     createClient,
-    getClientsBySeller
+    getClientsBySeller,
+    updateClient
 }

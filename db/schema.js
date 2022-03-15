@@ -96,6 +96,7 @@ const typeDefs = gql`
         deleteProduct(id: ID!) : responseDeleted
         # Clients
         createClient(input: ClientsInput!) : Client
+        updateClient(id: ID!, input: ClientsInput!) : Client
     }
 `;
 
