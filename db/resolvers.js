@@ -17,7 +17,9 @@ const {
 const {
     getClients,
     createClient,
-    getClientsBySeller
+    getClientsBySeller,
+    updateClient,
+    deleteClient
 } = require('../models/Client/resolvers');
 
 // Resolvers
@@ -37,7 +39,9 @@ const resolvers = {
         updateStock,
         updateProduct,
         deleteProduct,
-        createClient
+        createClient,
+        updateClient,
+        deleteClient
     }
 };
 

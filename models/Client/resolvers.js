@@ -47,8 +47,60 @@ const createClient = async (_, { input }, ctx) => {
     }
 };
 
+// Update client
+const updateClient = async(_, { id, input }, ctx) => {
+    // Verify if client exists
+    const client = await Client.findById(id);
+    if (!client) {
+        throw new Error('Client does not exists');
+    }
+    // Verify if seller is who edit
+    if (client.seller.toString() !== ctx.user.id) {
+        throw new Error('Not authorized');
+    }
+
+    // Update client
+    try {
+        const nclient = await Client.findByIdAndUpdate(id, input, { new: true });
+        return nclient;
+    }catch (err) {
+        console.log(err);
+    }
+};
+
+ // Delete client
+ const deleteClient = async(_, { id }, ctx) => {
+    // Verify if client exists
+    const client = await Client.findById(id);
+    if (!client) {
+        return {
+            wasDeleted: false,
+            message: `Client ${id} does not exists.`
+        }
+    }
+    // Verify if seller is who edit
+    if (client.seller.toString() !== ctx.user.id) {
+        return {
+            wasDeleted: false,
+            message: `Not authorized to delete.`
+        }
+    }
+    // Delete client
+    try {
+        await Client.findByIdAndDelete(id);
+        return {
+            wasDeleted: true,
+            message: `Client ${id} was deleted successfully.`
+        }
+    }catch (err) {
+        console.log(err);
+    }
+};
+
 module.exports = {
     getClients,
     createClient,
-    getClientsBySeller
+    getClientsBySeller,
+    updateClient,
+    deleteClient
 }
