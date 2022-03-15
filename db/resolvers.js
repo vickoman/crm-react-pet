@@ -18,7 +18,8 @@ const {
     getClients,
     createClient,
     getClientsBySeller,
-    updateClient
+    updateClient,
+    deleteClient
 } = require('../models/Client/resolvers');
 
 // Resolvers
@@ -39,7 +40,8 @@ const resolvers = {
         updateProduct,
         deleteProduct,
         createClient,
-        updateClient
+        updateClient,
+        deleteClient
     }
 };
 
