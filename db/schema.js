@@ -2,6 +2,12 @@ const {  gql } = require('apollo-server');
 
 // Schema
 const typeDefs = gql`
+    enum OrderStatus {
+        PENDING
+        COMPLETED
+        CANCELED
+    }
+
     type User {
         id: ID
         name: String
@@ -48,6 +54,22 @@ const typeDefs = gql`
         price: Float
         created_at: String
     }
+
+    type OrderProduct {
+        id: ID
+        amount: Int
+    }
+
+    type Order {
+        id: ID
+        order: [OrderProduct]
+        total: Float
+        client: ID
+        seller: ID
+        status: OrderStatus
+        created_at: String
+    }
+
     input ProductInput {
         name: String
         stock: Int
@@ -60,6 +82,18 @@ const typeDefs = gql`
         company: String!
         email: String!
         telephone: String
+    }
+
+    input OrderProductInput {
+        id: ID
+        amount: Int
+    }
+
+    input OrdersInput {
+        order: [OrderProductInput]
+        total: Float!
+        client: ID!
+        status: OrderStatus
     }
 
 
@@ -94,10 +128,14 @@ const typeDefs = gql`
         updateStock(id: ID!, stock: Int!) : Product
         updateProduct(id: ID!, input: ProductInput!) : Product
         deleteProduct(id: ID!) : responseDeleted
+
         # Clients
         createClient(input: ClientsInput!) : Client
         updateClient(id: ID!, input: ClientsInput!) : Client
         deleteClient(id: ID!) : responseDeleted
+
+        # Orders
+        addOrder(input: OrdersInput!) : Order
     }
 `;
 
