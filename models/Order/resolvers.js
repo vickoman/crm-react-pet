@@ -61,10 +61,25 @@ const getOrdersBySeller = async (_, {}, ctx) => {
     }catch (err) {
         throw new Error(err);
     }
-}
+};
+
+// Get order by id
+const getOrderById = async (_, { id }, ctx) => {
+    // If order exists
+    const order = await Order.findById(id);
+    if (!order) {
+        throw new Error(`Order ${id} not found`);
+    }
+    // If seller is requesting
+    if (order.seller.toString() !== ctx.user.id) {
+        throw new Error("You are not the seller and this operation it's not allowed!");
+    }
+    return order;
+};
 
 module.exports = {
     addOrder,
     getOrders,
-    getOrdersBySeller
+    getOrdersBySeller,
+    getOrderById
 }
