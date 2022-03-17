@@ -98,7 +98,7 @@ const updateOrder = async (_, { id, input }, ctx) => {
     }
 
     // Check the stock availability
-    for await (const product of input.order) {
+    for await (const product of order.order) {
         const { id } = product;
         const article = await Product.findById(id);
         if (article.stock < product.amount) {
