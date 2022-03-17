@@ -26,7 +26,8 @@ const {
     getOrders,
     getOrdersBySeller,
     getOrderById,
-    updateOrder
+    updateOrder,
+    deleteOrder
 } = require('../models/Order/resolvers');
 
 // Resolvers
@@ -53,7 +54,8 @@ const resolvers = {
         updateClient,
         deleteClient,
         addOrder,
-        updateOrder
+        updateOrder,
+        deleteOrder
     }
 };
 
