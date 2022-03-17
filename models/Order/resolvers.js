@@ -114,10 +114,42 @@ const updateOrder = async (_, { id, input }, ctx) => {
     return result;
 }
 
+// Delete order
+const deleteOrder = async (_, { id }, ctx) => {
+    // If order exists
+    const order = await Order.findById(id);
+    if (!order) {
+        return {
+            wasDeleted: false,
+            message: `Order ${id} not found`
+        }
+    }
+    // If seller is requesting
+    if (order.seller.toString() !== ctx.user.id) {
+        return {
+            wasDeleted: false,
+            message: "You are not the seller and this operation it's not allowed!"
+        }
+    }
+    try {
+        await Order.findOneAndDelete(id);
+        return {
+            wasDeleted: true,
+            message: `Order ${id} was deleted successfully`
+        }
+    } catch (err) {
+        return {
+            wasDeleted: false,
+            message: err
+        }
+    }
+};
+
 module.exports = {
     addOrder,
     getOrders,
     getOrdersBySeller,
     getOrderById,
-    updateOrder
+    updateOrder,
+    deleteOrder
 }
