@@ -53,7 +53,18 @@ const getOrders = async () => {
     }
 };
 
+// Get orders by seller
+const getOrdersBySeller = async (_, {}, ctx) => {
+    try {
+        const result = await Order.find({seller: ctx.user.id});
+        return result;
+    }catch (err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
     addOrder,
-    getOrders
+    getOrders,
+    getOrdersBySeller
 }
