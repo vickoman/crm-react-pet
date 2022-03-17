@@ -96,6 +96,11 @@ const typeDefs = gql`
         status: OrderStatus
     }
 
+    type responseDeleted {
+        wasDeleted: Boolean!
+        message: String,
+    }
+
 
     type Query {
         # Users
@@ -109,11 +114,9 @@ const typeDefs = gql`
         # Clients
         getClients: [Client]
         getClientsBySeller: [Client]
-    }
 
-    type responseDeleted {
-        wasDeleted: Boolean!
-        message: String,
+        # Orders
+        getOrders: [Order]
     }
 
     type Mutation {

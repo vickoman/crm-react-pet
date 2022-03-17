@@ -43,6 +43,17 @@ const addOrder = async (_, { input }, ctx) => {
     }
 };
 
+// get Orders
+const getOrders = async () => {
+    try {
+        const result = await Order.find();
+        return result;
+    }catch (err) {
+        throw new Error(err);
+    }
+};
+
 module.exports = {
-    addOrder
+    addOrder,
+    getOrders
 }

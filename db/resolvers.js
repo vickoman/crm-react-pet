@@ -22,7 +22,8 @@ const {
     deleteClient
 } = require('../models/Client/resolvers');
 const {
-    addOrder
+    addOrder,
+    getOrders
 } = require('../models/Order/resolvers');
 
 // Resolvers
@@ -33,7 +34,8 @@ const resolvers = {
         getAllProducts,
         getProduct,
         getClients,
-        getClientsBySeller
+        getClientsBySeller,
+        getOrders
     },
     Mutation: {
         auth,
