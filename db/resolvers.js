@@ -21,6 +21,9 @@ const {
     updateClient,
     deleteClient
 } = require('../models/Client/resolvers');
+const {
+    addOrder
+} = require('../models/Order/resolvers');
 
 // Resolvers
 const resolvers = {
@@ -41,7 +44,8 @@ const resolvers = {
         deleteProduct,
         createClient,
         updateClient,
-        deleteClient
+        deleteClient,
+        addOrder
     }
 };
 
