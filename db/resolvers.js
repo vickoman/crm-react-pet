@@ -23,7 +23,8 @@ const {
 } = require('../models/Client/resolvers');
 const {
     addOrder,
-    getOrders
+    getOrders,
+    getOrdersBySeller
 } = require('../models/Order/resolvers');
 
 // Resolvers
@@ -35,7 +36,8 @@ const resolvers = {
         getProduct,
         getClients,
         getClientsBySeller,
-        getOrders
+        getOrders,
+        getOrdersBySeller
     },
     Mutation: {
         auth,
