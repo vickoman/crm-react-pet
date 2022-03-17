@@ -91,8 +91,8 @@ const typeDefs = gql`
 
     input OrdersInput {
         order: [OrderProductInput]
-        total: Float!
-        client: ID!
+        total: Float
+        client: ID
         status: OrderStatus
     }
 
@@ -119,6 +119,7 @@ const typeDefs = gql`
         getOrders: [Order]
         getOrdersBySeller: [Order]
         getOrderById(id: ID!): Order
+        getOrderByStatus(status: String!): [Order]
     }
 
     type Mutation {
@@ -142,6 +143,7 @@ const typeDefs = gql`
         # Orders
         addOrder(input: OrdersInput!) : Order
         updateOrder(id: ID!, input: OrdersInput!) : Order
+        deleteOrder(id: ID!) : responseDeleted
     }
 `;
 

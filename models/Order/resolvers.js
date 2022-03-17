@@ -98,7 +98,7 @@ const updateOrder = async (_, { id, input }, ctx) => {
     }
 
     // Check the stock availability
-    for await (const product of input.order) {
+    for await (const product of order.order) {
         const { id } = product;
         const article = await Product.findById(id);
         if (article.stock < product.amount) {
@@ -114,10 +114,53 @@ const updateOrder = async (_, { id, input }, ctx) => {
     return result;
 }
 
+// Delete order
+const deleteOrder = async (_, { id }, ctx) => {
+    // If order exists
+    const order = await Order.findById(id);
+    if (!order) {
+        return {
+            wasDeleted: false,
+            message: `Order ${id} not found`
+        }
+    }
+    // If seller is requesting
+    if (order.seller.toString() !== ctx.user.id) {
+        return {
+            wasDeleted: false,
+            message: "You are not the seller and this operation it's not allowed!"
+        }
+    }
+    try {
+        await Order.findOneAndDelete(id);
+        return {
+            wasDeleted: true,
+            message: `Order ${id} was deleted successfully`
+        }
+    } catch (err) {
+        return {
+            wasDeleted: false,
+            message: err
+        }
+    }
+};
+
+// Get orders by status
+const getOrderByStatus = async (_, { status }, ctx) => {
+    try {
+        const result = await Order.find({seller: ctx.user.id, status});
+        return result;
+    }catch (err) {
+        throw new Error(err);
+    }
+};
+
 module.exports = {
     addOrder,
     getOrders,
     getOrdersBySeller,
     getOrderById,
-    updateOrder
+    updateOrder,
+    deleteOrder,
+    getOrderByStatus
 }
