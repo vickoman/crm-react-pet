@@ -145,11 +145,22 @@ const deleteOrder = async (_, { id }, ctx) => {
     }
 };
 
+// Get orders by status
+const getOrderByStatus = async (_, { status }, ctx) => {
+    try {
+        const result = await Order.find({seller: ctx.user.id, status});
+        return result;
+    }catch (err) {
+        throw new Error(err);
+    }
+};
+
 module.exports = {
     addOrder,
     getOrders,
     getOrdersBySeller,
     getOrderById,
     updateOrder,
-    deleteOrder
+    deleteOrder,
+    getOrderByStatus
 }
