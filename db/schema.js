@@ -141,6 +141,7 @@ const typeDefs = gql`
 
         # Orders
         addOrder(input: OrdersInput!) : Order
+        updateOrder(id: ID!, input: OrdersInput!) : Order
     }
 `;
 
