@@ -80,11 +80,18 @@ const createProduct = async(_, { input }, ctx, info) => {
     }
 };
 
+// Find product
+const findProduct = async(_, { text }) => {
+    const product = await Product.find({ $text: { $search: text } });
+    return product;
+};
+
 module.exports = {
     getProduct,
     getAllProducts,
     createProduct,
     updateStock,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    findProduct
 }

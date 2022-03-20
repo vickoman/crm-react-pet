@@ -120,6 +120,7 @@ const typeDefs = gql`
         # Products
         getAllProducts: [Product]
         getProduct(id: ID!): Product
+        findProduct(text: String!): [Product]
 
         # Clients
         getClients: [Client]
