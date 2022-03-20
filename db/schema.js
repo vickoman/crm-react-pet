@@ -101,6 +101,11 @@ const typeDefs = gql`
         message: String,
     }
 
+    type TopClient {
+        total: Float
+        clients: [Client]
+    }
+
 
     type Query {
         # Users
@@ -114,6 +119,7 @@ const typeDefs = gql`
         # Clients
         getClients: [Client]
         getClientsBySeller: [Client]
+        getTopclients: [TopClient]
 
         # Orders
         getOrders: [Order]

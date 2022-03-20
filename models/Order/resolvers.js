@@ -155,6 +155,32 @@ const getOrderByStatus = async (_, { status }, ctx) => {
     }
 };
 
+// Get best clients
+const getTopclients = async () => {
+    const clients = await Order.aggregate([
+        {
+            $match: {
+                status: "COMPLETED"
+            }
+        },
+        {
+            $group: {
+                _id: "$client",
+                total: { $sum: "$total" }
+            }
+        },{
+            $lookup: {
+                from: "clients",
+                localField: "_id",
+                foreignField: "_id",
+                as: "clients"
+            }
+        }
+    ]);
+    console.log(clients);
+    return clients;
+};
+
 module.exports = {
     addOrder,
     getOrders,
@@ -162,5 +188,6 @@ module.exports = {
     getOrderById,
     updateOrder,
     deleteOrder,
-    getOrderByStatus
+    getOrderByStatus,
+    getTopclients
 }
