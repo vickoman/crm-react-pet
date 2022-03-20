@@ -6,7 +6,8 @@ const {
     updateProduct,
     updateStock,
     createProduct,
-    deleteProduct
+    deleteProduct,
+    findProduct
 } = require('../models/Product/resolvers');
 const {
     auth,
@@ -47,7 +48,8 @@ const resolvers = {
         getOrderById,
         getOrderByStatus,
         getTopclients,
-        getTopSellers
+        getTopSellers,
+        findProduct
     },
     Mutation: {
         auth,
