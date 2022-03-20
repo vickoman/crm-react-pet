@@ -28,7 +28,8 @@ const {
     getOrderById,
     updateOrder,
     deleteOrder,
-    getOrderByStatus
+    getOrderByStatus,
+    getTopclients
 } = require('../models/Order/resolvers');
 
 // Resolvers
@@ -43,7 +44,8 @@ const resolvers = {
         getOrders,
         getOrdersBySeller,
         getOrderById,
-        getOrderByStatus
+        getOrderByStatus,
+        getTopclients
     },
     Mutation: {
         auth,
