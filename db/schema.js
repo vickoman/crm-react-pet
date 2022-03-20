@@ -103,7 +103,12 @@ const typeDefs = gql`
 
     type TopClient {
         total: Float
-        clients: [Client]
+        client: Client
+    }
+
+    type TopSellers {
+        total: Float
+        seller: User
     }
 
 
@@ -119,13 +124,14 @@ const typeDefs = gql`
         # Clients
         getClients: [Client]
         getClientsBySeller: [Client]
-        getTopclients: [TopClient]
 
         # Orders
         getOrders: [Order]
         getOrdersBySeller: [Order]
         getOrderById(id: ID!): Order
         getOrderByStatus(status: String!): [Order]
+        getTopclients: [TopClient]
+        getTopSellers: [TopSellers]
     }
 
     type Mutation {
