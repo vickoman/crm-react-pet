@@ -1,6 +1,7 @@
 const Order = require("./Order");
 const Client = require("../Client/Client");
 const Product = require("../Product/Product");
+const User = require("../User/User");
 
 const addOrder = async (_, { input }, ctx) => {
     const {client} = input;
@@ -173,12 +174,61 @@ const getTopclients = async () => {
                 from: "clients",
                 localField: "_id",
                 foreignField: "_id",
-                as: "clients"
+                as: "client"
+            }
+        },{
+            $limit: 5
+        },{
+            $sort: {
+                total: -1
             }
         }
     ]);
-    console.log(clients);
-    return clients;
+    const docs = clients.map(doc => {
+        return {
+            client: Client.hydrate(doc.client[0]),
+            total: doc.total
+        }
+    });
+    return docs;
+};
+
+// Get best sellers
+const getTopSellers = async () => {
+    const sellers = await Order.aggregate([
+        {
+            $match: {
+                status: "COMPLETED"
+            }
+        },
+        {
+            $group: {
+                _id: "$seller",
+                total: { $sum: "$total" }
+            }
+        },{
+            $lookup: {
+                from: "usuarios",
+                localField: "_id",
+                foreignField: "_id",
+                as: "seller"
+            }
+        }, {
+            $limit: 5
+        },
+        {
+            $sort: {
+                total: -1
+            }
+        }
+    ]);
+    const docs = sellers.map(doc => {
+        return {
+            seller: User.hydrate(doc.seller[0]),
+            total: doc.total
+        }
+    });
+    return docs;
 };
 
 module.exports = {
@@ -189,5 +239,6 @@ module.exports = {
     updateOrder,
     deleteOrder,
     getOrderByStatus,
-    getTopclients
+    getTopclients,
+    getTopSellers
 }
