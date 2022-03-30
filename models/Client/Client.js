@@ -24,7 +24,7 @@ const ClientSchema = mongoose.Schema({
     },
     telephone: {
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     seller: {

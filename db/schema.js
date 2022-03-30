@@ -115,7 +115,7 @@ const typeDefs = gql`
     type Query {
         # Users
         getUsers: [User]
-        getUser(token: String!): User
+        getUser: User
 
         # Products
         getAllProducts: [Product]
@@ -125,6 +125,7 @@ const typeDefs = gql`
         # Clients
         getClients: [Client]
         getClientsBySeller: [Client]
+        getClientById(id: ID!): Client
 
         # Orders
         getOrders: [Order]

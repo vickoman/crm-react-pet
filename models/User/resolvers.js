@@ -51,9 +51,8 @@ const getUsers = async () => {
     return User.find();
 };
 
-const getUser = async (_, { token }) => {
-    const userId = await jwt.verify(token, process.env.SECRET);
-    return userId;
+const getUser = async (_, {}, ctx) => {
+    return ctx.user;
 };
 
 module.exports = {

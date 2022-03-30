@@ -17,6 +17,7 @@ const {
 } = require('../models/User/resolvers');
 const {
     getClients,
+    getClientById,
     createClient,
     getClientsBySeller,
     updateClient,
@@ -42,6 +43,7 @@ const resolvers = {
         getAllProducts,
         getProduct,
         getClients,
+        getClientById,
         getClientsBySeller,
         getOrders,
         getOrdersBySeller,
