@@ -13,6 +13,24 @@ const getClients = async() => {
     }
 };
 
+// Get Client by id
+const getClientById = async(_, { id }, ctx) => {
+    try {
+        const client = await Client.findById(id);
+        if (!client) {
+            return new Error('Client does not exists');
+        }
+
+        // Verify if seller is who edit
+        if (client.seller.toString() !== ctx.user.id) {
+            throw new Error('Not authorized');
+        }
+        return client;
+    } catch (err) {
+        return new Error(err);
+    }
+};
+
 // Get Clients By seller logged
 const getClientsBySeller = async(_, {}, ctx) => {
     try {
@@ -73,17 +91,11 @@ const updateClient = async(_, { id, input }, ctx) => {
     // Verify if client exists
     const client = await Client.findById(id);
     if (!client) {
-        return {
-            wasDeleted: false,
-            message: `Client ${id} does not exists.`
-        }
+        throw new Error(`Client ${id} does not exists.`)
     }
     // Verify if seller is who edit
     if (client.seller.toString() !== ctx.user.id) {
-        return {
-            wasDeleted: false,
-            message: `Not authorized to delete.`
-        }
+        throw new Error(`Not authorized to delete.`)
     }
     // Delete client
     try {
@@ -102,5 +114,6 @@ module.exports = {
     createClient,
     getClientsBySeller,
     updateClient,
-    deleteClient
+    deleteClient,
+    getClientById
 }
